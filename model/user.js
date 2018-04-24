@@ -1,53 +1,24 @@
-// class User {
-//     constructor(id, name, age) {
-//         this.id = id;
-//         this.name = name;
-//         this.age = age;
-//     }
-//     setId(id) {
-//         this.id = id;
-//     }
-//     getId() {
-//         return this.id;
-//     }
-//     setName() {
-//         this.name = name;
-//     }
-//     getName() {
-//         return this.name;
-//     }
-//     setAge() {
-//         this.age = age;
-//     }
-//     getAge() {
+'use strict'
 
-//     }
-//     setSex() {
+const UUID = require("../base/uuid"); 
 
-//     }
-//     getSex() {
-
-//     }
-
-//      test() {
-
-//     }
-// }
-
-
-function User() {
-    name: number;
-    sex: boolean;
-    age: String;
-
-    var init = function () {
-        console.log('private');
+class User {
+    constructor(params) {
+        this._id = params.id;
+        this._token = params.token;
+        this._username = params.username;
+        this._password = params.password;
     }
-    var test = function () {
-        console.log('private test to public');
+
+    async create(username, password) {
+        this._id = UUID.uuidv1();
+        this._username = params.username;
+        this._password = params.password;
     }
-    this.get = test;
-    init();
+
+    async createToken() {
+        this._token = UUID.uuidv1();
+    }
 }
 
 module.exports = User;
