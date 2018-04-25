@@ -1,0 +1,14 @@
+body {font-size: 14px;font-family: 'microsoft yahei';margin: 0;padding: 0;background: #f2f2f2;}
+.lbtn{background:green;color: #fff;border: none;height:40px;width: 300px;}
+.lbtn:hover{cursor: pointer;background:rgb(52, 158, 46)}
+.t{line-height: 40px;background:#666;color: #fff;display: inline-block;width:50px;text-align: center;}
+input[type="text"], input[type="password"] {border:none;outline:none;}
+
+.pt{width: 100%;border-spacing: 0;}
+.pt .tp{border-radius:2px;width:40px;display:inline-block;height:15px;font-size:12px;background:#DD6A1B;padding:2px;text-align:center;color:#fff;text-decoration:none;}
+.pt th{height:30px;padding:4px;text-align:left;border-bottom:solid 1px #ddd;font-size:13px;}
+.pt tr{background: #fff;}
+.pt tr:hover{background: #f5f5f5;}
+.pt tr td{border-bottom: solid 1px #ddd;}
+.pt tr td:hover{cursor: pointer;}
+.pt tr td .circle{width: 50px;height: 50px;border-color: #2F4050; background-color:#2F4050;opacity: 1; border-radius: 50%;-moz-border-radius: 50%; -webkit-border-radius: 50%;}

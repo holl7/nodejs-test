@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <title>test</title>
+    <script type="text/javascript" src='../../js/vue.js'></script>
+    <script type="text/javascript" src='../../js/jquery/jquery-1.9.1.min.js'></script>
+    <link rel="stylesheet" href="../../css/common.css" />
+</head>
+
+<body style="background: #fff;">
+    <div id="app">
+        <div style="height: 80px;background: #333">
+            <span></span>
+        </div>
+        <div style="background: #f2f2f2;margin:0 auto;width: 70%;">
+            <div>
+                <table class="pt">
+                    <tr>
+                        <th>用户名</th>
+                        <th>注册时间</th>
+                    </tr>
+                    <tr style="height: 40px;" v-for="item in users">
+                        <td>{{item.username}}</td>
+                        <td>{{item.createdtime}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style="height: 200px;background: #fff;">
+        </div>
+    </div>
+    <script type="text/javascript">
+        var appdata = {
+            users: []
+        };
+        new Vue({
+            el: '#app',
+            data: appdata,
+            methods: {
+                getUsers: function () {
+                    $.ajax({
+                        type: 'POST',
+                        url: "/user/all",
+                        //data: JSON.stringify(appdata.user),
+                        contentType: "application/json",
+                        success: function (data) {
+                            console.log(data);
+                            appdata.users = JSON.parse(data);
+                        }
+                    });
+                }
+            },
+            mounted: function () {
+                this.getUsers();
+            }
+        })
+    </script>
+</body>
+
+</html>

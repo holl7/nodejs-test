@@ -7,10 +7,14 @@ var fs = require("fs");
 var cookieParser = require('cookie-parser');
 var util = require('util');
 var userServices = require('./services/userservices');
+var UserDB = require("./client/db/userdb")
+var Util = require("./base/util")
 app.use(cookieParser());
 
-
-
+//body-parser 解析json格式数据
+app.use(bodyParser.json({ limit: '1mb' }));
+//此项必须在 bodyParser.json 下面,为参数编码
+app.use(bodyParser.urlencoded({ extended: true }));
 // 创建 application/x-www-form-urlencoded 编码解析
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -50,22 +54,41 @@ app.post('/user/get/:id', function (req, res) {
     userservicesImpl.getUserById(id);
 });
 
-app.post('/user/add', urlencodedParser, function (req, res) {
-    console.log("/user add 请求");
-    console.log(req);
-    //res.send('用户列表页面');
-    //console.log(req.params)
-
-    //var userservicesImpl = new userServices();
-    //userservicesImpl.addUser('holl7', 1, 30);
-
-    res.send(JSON.stringify({ bresult: true }));
-    res.end();
+app.get('/user/register', (req, res) => {
+    console.log("/user register");
+    res.sendFile(__dirname + '/public/views/user/' + "register.html");
 });
+
+
+//添加用户
+app.post('/user/add', async (req, res) => {
+    var user = req.body;
+    if (req.body) {
+        user.id = Util.uuidv1();
+        let userDB = new UserDB();
+        let data = await userDB.addUser(user);
+        console.log("xxx");
+        console.log(data);
+        res.end(JSON.stringify({ bresult: true }));
+    }
+    else {
+        res.end(JSON.stringify({
+            bresult: false, errorMsg: '未传递任何参数'
+        }));
+    }
+});
+
+
+app.get('/user/index', async (req, res) => {
+    console.log("/user index");
+    res.sendFile(__dirname + '/public/views/user/' + "index.html");
+});
+
+
 app.post('/user/all', async (req, res) => {
     console.log("/user all 请求");
-    var userservicesImpl = new userServices();
-    var list = await userservicesImpl.getAllUser();
+    var userdb = new UserDB();
+    var list = await userdb.getAllUser();
     console.log(JSON.stringify(list));
     res.end(JSON.stringify(list));
 });

@@ -1,6 +1,10 @@
 'use strict'
 
+<<<<<<< HEAD
+const Util = require("../base/util");
+=======
 const UUID = require("../base/uuid"); 
+>>>>>>> f361646e8b7f15056dcd0f7638a93b23ee47228e
 
 class User {
     constructor(params) {
@@ -11,7 +15,11 @@ class User {
     }
 
     async create(username, password) {
+<<<<<<< HEAD
+        this._id = Util.uuidv1();
+=======
         this._id = UUID.uuidv1();
+>>>>>>> f361646e8b7f15056dcd0f7638a93b23ee47228e
         this._username = params.username;
         this._password = params.password;
     }
